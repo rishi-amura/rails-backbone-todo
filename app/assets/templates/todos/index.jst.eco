@@ -1,0 +1,8 @@
+<center>
+  <h2><u>Todos List</u></h2>
+  <div class="row add-todo-row">
+    <div class="col-md-10"><input type="text" id="todo-input" class="form-control"></div>
+    <div class="col-md-2"><input type="button" class="btn" id="create-todo" value="Add"></div>
+  </div>
+  <ul id="todo-list"></ul>
+</center>
