@@ -1,8 +1,15 @@
 <center>
   <h2><u>Todos List</u></h2>
   <div class="row add-todo-row">
-    <div class="col-md-10"><input type="text" id="todo-input" class="form-control"></div>
+    <div class="col-md-10"><input type="text" id="todo-input" class="form-control" autofocus></div>
     <div class="col-md-2"><input type="button" class="btn" id="create-todo" value="Add"></div>
   </div>
-  <ul id="todo-list"></ul>
+  <ul id="todo-list">
+  <% for todo in @todos.models: %>
+    <li class="todo-list-li row">
+      <div class="col-md-10 todo-list-li-text"><%= todo.get('name') %></div>
+      <div class="col-md-2"><button type="button" class="todo-list-li-delete close" id="<%= todo.get('id') %>" data-dismiss="modal">&times;</button></div>
+    </li>
+  <% end %>
+  </ul>
 </center>
