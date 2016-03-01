@@ -12,5 +12,13 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require underscore
+//= require backbone
 //= require turbolinks
+//= require rails_backbone_todo
+//= require_tree ../templates
+//= require_tree ./collections
+//= require_tree ./models
+//= require_tree ./routes
+//= require_tree ./views
 //= require_tree .
