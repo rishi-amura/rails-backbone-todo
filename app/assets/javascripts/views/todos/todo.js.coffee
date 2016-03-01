@@ -19,6 +19,8 @@ class RailsBackboneTodo.Views.Todo extends Backbone.View
     this
 
   editTodo: (event) ->
+    window.prev_view.render() if $.find('.edit-input').length == 1
+    window.prev_view = @
     $(@el).html('<input type="text" class="form-control edit-input" value="' + @model.get('name') + '">')
 
   updateTodo: (event) ->
