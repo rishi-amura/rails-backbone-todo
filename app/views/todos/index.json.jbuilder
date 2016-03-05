@@ -1,3 +1,3 @@
 json.array!(@todos) do |todo|
-  json.extract! todo, :name, :id
+  json.extract! todo, :id, :name, :done
 end

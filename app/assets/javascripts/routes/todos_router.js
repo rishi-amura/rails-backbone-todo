@@ -3,12 +3,12 @@ RailsBackboneTodo.Routers.TodosRouter = Backbone.Router.extend({
     '': 'index',
     'backbone(/)': 'index'
   },
+  initialize: function(){
+    this.collection = new RailsBackboneTodo.Collections.Todos();
+    this.collection.fetch();
+  },
   index: function(){
-    var todos = new RailsBackboneTodo.Collections.Todos();
-    todos.fetch({
-      success: function(data, response){
-        console.log(data);
-      }
-    });
+    var index_view = new RailsBackboneTodo.Views.TodosIndex({collection: this.collection});
+    $('#container').html(index_view.render().el)
   }
 });

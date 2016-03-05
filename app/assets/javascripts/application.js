@@ -15,6 +15,7 @@
 //= require underscore
 //= require backbone
 //= require turbolinks
+//= require bootstrap
 //= require rails_backbone_todo
 //= require_tree ../templates
 //= require_tree ./collections
