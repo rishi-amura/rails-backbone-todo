@@ -5,7 +5,8 @@ RailsBackboneTodo.Views.Todo = Backbone.View.extend({
   events: {
     'dblclick .todo-list-li-text': 'editTodo',
     'click .todo-list-li-delete': 'deleteTodo',
-    'keyup .edit-input': 'updateTodo'
+    'keyup .edit-input': 'updateTodo',
+    'change #todo-done': 'toggleTodo'
   },
   initialize: function(){
     this.model.on('destroy', this.remove, this);
@@ -28,5 +29,8 @@ RailsBackboneTodo.Views.Todo = Backbone.View.extend({
   deleteTodo: function(){
     if(confirm("Are you sure?"))
       this.model.destroy();
+  },
+  toggleTodo: function(){
+    this.model.save({done: !(this.model.get('done'))});
   }
 });
