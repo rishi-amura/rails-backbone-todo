@@ -4,8 +4,11 @@ RailsBackboneTodo.Views.TodosIndex = Backbone.View.extend({
     'keyup #todo-input': 'getInput'
   },
   initialize: function(){
-    this.collection.on('reset', this.render, this)
-    this.collection.on('add', this.prependList, this)
+    this.collection.on('reset', this.render, this);
+    this.collection.on('add', this.prependList, this);
+    this.collection.on('add', this.updateItemsCounter, this);
+    this.collection.on('change', this.updateItemsCounter, this);
+    this.collection.on('remove', this.updateItemsCounter, this);
   },
   render: function(){
     $(this.el).html(this.template());
@@ -24,5 +27,8 @@ RailsBackboneTodo.Views.TodosIndex = Backbone.View.extend({
     var todo_select =  $('#todo-input');
     this.collection.create({name: todo_select.val()});
     todo_select.val('');
+  },
+  updateItemsCounter: function() {
+    $('#todo-done-counter').html(this.collection.where({done: false}).length);
   }
 });

@@ -9,6 +9,6 @@ RailsBackboneTodo.Routers.TodosRouter = Backbone.Router.extend({
   },
   index: function(){
     var index_view = new RailsBackboneTodo.Views.TodosIndex({collection: this.collection});
-    $('#container').html(index_view.render().el)
+    $('#container').html(index_view.render().el);
   }
 });
