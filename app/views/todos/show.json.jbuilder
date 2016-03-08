@@ -1,2 +1,1 @@
-json.id @todo.id.to_s
-json.name @todo.name
+json.extract! @todo, :id, :name, :done
