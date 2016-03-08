@@ -2,9 +2,12 @@ RailsBackboneTodo.Views.TodosIndex = Backbone.View.extend({
   template: JST['todos/index'],
   events: {
     'keyup #todo-input': 'getInput',
-    'click #clear-completed-link': 'clearCompleted'
+    'click #clear-completed-link': 'clearCompleted',
+    'click #all-todos-link': 'renderAllTodos',
+    'click #active-todos-link': 'renderActiveTodos',
+    'click #completed-todos-link': 'renderCompletedTodos'
   },
-  initialize: function(){
+  initialize: function(options){
     this.collection.on('reset', this.render, this);
     this.collection.on('add', this.prependList, this);
     this.collection.on('add', this.updateItemsCounter, this);
@@ -13,6 +16,7 @@ RailsBackboneTodo.Views.TodosIndex = Backbone.View.extend({
     this.collection.on('add', this.enableClearLink, this);
     this.collection.on('change', this.enableClearLink, this);
     this.collection.on('remove', this.enableClearLink, this);
+    this.options = options;
   },
   render: function(){
     $(this.el).html(this.template());
@@ -20,8 +24,10 @@ RailsBackboneTodo.Views.TodosIndex = Backbone.View.extend({
     return(this);
   },
   prependList: function(model){
-    var view = new RailsBackboneTodo.Views.Todo({model: model});
-    $('#todo-list').prepend(view.render().el);
+    if(this.options.flag === undefined || this.options.flag === model.get('done')){
+      var view = new RailsBackboneTodo.Views.Todo({model: model});
+      $('#todo-list').prepend(view.render().el);
+    }
   },
   getInput: function(event){
     if(event.keyCode == 13)
@@ -41,5 +47,18 @@ RailsBackboneTodo.Views.TodosIndex = Backbone.View.extend({
   clearCompleted: function() {
     var todos_completed = this.collection.where({done: true});
     _.each(todos_completed, function(model) { model.destroy(); });
+  },
+  renderAllTodos: function() {
+    this.performNavigation('/');
+  },
+  renderActiveTodos: function() {
+    this.performNavigation('active');
+  },
+  renderCompletedTodos: function() {
+    this.performNavigation('completed');
+  },
+  performNavigation: function(url) {
+    var todos_router = new RailsBackboneTodo.Routers.TodosRouter();
+    todos_router.navigate(url, {trigger: true});
   }
 });
